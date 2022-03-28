@@ -1,17 +1,17 @@
 # marcador-presenca
 ## CRUD para presenças - ADMIN
 
-- Listagem com filtro por intervalo de datas
-- Adição de presença por CPF
-- Remoção de presença registrada a partir do ID
-- Edição de presença registrada a partir do ID
+- Listagem com filtro por intervalo de datas - AdminPresencesListController
+- Adição de presença por CPF - AddPresenceController
+- Remoção de presença registrada a partir do ID - AdminRemovePresenceController
+- Edição de presença registrada a partir do ID - AdminUpdatePresenceController
 
 ## Funcionário sem permissão de administrador
-- Busca/Lista presenças por CPF
-- registra nova presença na data atual
+- Busca/Lista presenças por CPF - PresencesListController
+- registra nova presença na data atual - AddPresenceController
 
 ## Tabelas
-- Tabela de funcionário, onde o campo boolean `admin` diz se o usuário possui ou não permissões de administrador
+- Tabela de funcionário, onde o campo boolean `admin`  diz se o usuário possui ou não permissões de administrador
 - Tabela de Presenças, linkada à tabela de funcionários pela chave estrangeira `CPF`
 
 ## Considerações

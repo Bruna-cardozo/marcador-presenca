@@ -31,7 +31,7 @@ Route::get('admin/presence/list', 'AdminPresencesListController@list')
 Route::patch('admin/presence/{id}/edit', 'AdminUpdatePresenceController@update')
     ->name('atualizar_presencas_admin')
     ->middleware('autenticador');
-Route::delete('admin/presence/{id}', 'presencasController@remove')
+Route::delete('admin/presence/{id}', 'AdminRemovePresenceController@remove')
     ->name('deletar_presencas_admin')
     ->middleware('autenticador');
 
