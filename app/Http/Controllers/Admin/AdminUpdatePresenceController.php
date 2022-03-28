@@ -16,14 +16,13 @@ class AdminUpdatePresenceController extends BaseController
     public function update(
         ServerRequestInterface $request,
         ResponseInterface $response,
+        int $presenceId
     ): ResponseInterface {
         $userCpf = $request->getAttribute('cpf_usuario');
-        $employeeCpf = $request->getAttribute('cpf');
-        $date = $request->getAttribute('date');
 
         $this->employee->verifyIsAdmin($userCpf);
 
-        $result = $this->presence->updatePresence($employeeCpf, $date);
+        $result = $this->presence->updatePresence($presenceId);
 
         return $this->toJson($response, 200, 'ok', $result);
     }

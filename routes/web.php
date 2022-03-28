@@ -28,7 +28,7 @@ Route::post('/presence/register', 'AddPresenceController@add')
 Route::get('admin/presence/list', 'AdminPresencesListController@list')
     ->name('listar_presencas_admin')
     ->middleware('autenticador');
-Route::patch('admin/presence/edit', 'AdminUpdatePresenceController@update')
+Route::patch('admin/presence/{id}/edit', 'AdminUpdatePresenceController@update')
     ->name('atualizar_presencas_admin')
     ->middleware('autenticador');
 Route::delete('admin/presence/{id}', 'presencasController@remove')

@@ -66,22 +66,18 @@ class Presence extends Model
         $this->db::table('tabela_presencas')->delete($presenceId);
     }
 
-    public function updatePresence(string $employeeCpf, DateTime $date)
+    public function updatePresence(int $presenceId)
     {
-        $this->verifyEmployee($employeeCpf);
+        $presenceData = $this->db::table('tabela_presencas')->where('id', $presenceId)->get();
 
-        $employeePresent = $this->db::table('tabela_presencas')
-            ->whereRaw('cpf = ? and data_presença = ?', [$employeeCpf, $date])
-            ->get();
-
-        if (!$employeePresent) {
-            throw new Exception("Não há presença registrada nesta data.");
+        if (!$presenceData) {
+            throw new Exception("Presença com id '$presenceId' não encontrada");
         }
 
-        ($employeePresent['presente']) ? $newStatus = 0 : $newStatus = 1;
+        ($presenceData['presente']) ? $newStatus = 0 : $newStatus = 1;
 
         $this->db::table('tabela_presencas')
-            ->where('cpf', $employeeCpf)
+            ->where('id', $presenceId)
             ->update(['presente' => $newStatus]);
     }
 
