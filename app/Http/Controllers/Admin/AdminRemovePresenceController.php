@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Presence;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class AdminRemovePresenceController extends BaseController
@@ -15,15 +15,16 @@ class AdminRemovePresenceController extends BaseController
 
     public function remove(
         ServerRequestInterface $request,
-        ResponseInterface $response,
         int $presenceId
-    ): ResponseInterface {
+    ): JsonResponse {
         $userCpf = $request->getAttribute('cpf_usuario');
 
         $this->employee->verifyIsAdmin($userCpf);
 
-        $result = $this->presence->removePresence($presenceId);
+        $this->presence->removePresence($presenceId);
 
-        return $this->toJson($response, 200, 'ok', $result);
+        return response()->json([
+            'message' => 'Presença revogada com sucesso'
+        ]);
     }
 }

@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Employee;
 use App\Models\Presence;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Auth;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class AdminPresencesListController extends BaseController
@@ -17,9 +16,8 @@ class AdminPresencesListController extends BaseController
     ){}
 
     public function list(
-        ServerRequestInterface $request,
-        ResponseInterface $response
-    ): ResponseInterface {
+        ServerRequestInterface $request
+    ): JsonResponse {
         $userCpf = $request->getAttribute('cpf_usuario');
         $initialDate = $request->getAttribute('data_inicial');
         $finalDate = $request->getAttribute('data_final');
@@ -31,6 +29,6 @@ class AdminPresencesListController extends BaseController
             $initialDate,
         );
 
-        return $this->toJson($response, 200, 'ok', $result);
+        return response()->json($result);
     }
 }

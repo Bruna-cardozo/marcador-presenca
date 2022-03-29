@@ -2,21 +2,22 @@
 
 namespace Tests\Feature;
 
-use Database\Factories\EmployeeFactory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AddPresenceFTest extends TestCase
 {
     /**
-     * A basic test example.
-     *
      * @return void
      */
     public function testAddNewPresenceSuccess()
     {
-        $response = $this->post('/presence/register');
+        $response = $this->json(
+            'POST',
+            '/presence/register',
+            ['cpf' => '12345678910']
+        );
 
         $response->assertStatus(200);
+        $response->assertJson(['message' => 'Presença registrada com sucesso']);
     }
 }

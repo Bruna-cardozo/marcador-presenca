@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Presence;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,12 +16,13 @@ class AddPresenceController extends BaseController
 
     public function add(
         ServerRequestInterface $request,
-        ResponseInterface $response,
-    ): ResponseInterface {
+    ): JsonResponse {
         $employeeCpf = $request->getAttribute('cpf');
 
-        $result = $this->presence->registerNewPresence($employeeCpf);
+        $this->presence->registerNewPresence($employeeCpf);
 
-        return $this->toJson($response, 200, 'ok', $result);
+        return response()->json([
+            'message' => 'Presença registrada com sucesso'
+        ]);
     }
 }
