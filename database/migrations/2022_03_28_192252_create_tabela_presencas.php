@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('tabela_presencas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('cpf')->unsigned();
             $table->foreign('cpf')->references('tabela_funcionarios')->on('cpf');
             $table->dateTime('data_presenca');
             $table->boolean('presente');

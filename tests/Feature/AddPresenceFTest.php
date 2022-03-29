@@ -15,7 +15,7 @@ class AddPresenceFTest extends TestCase
      */
     public function testAddNewPresenceSuccess()
     {
-        $response = $this->get('/presence/register');
+        $response = $this->post('/presence/register');
 
         $response->assertStatus(200);
     }
